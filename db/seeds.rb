@@ -2,7 +2,7 @@ User.create!(name:  "nvluan",
              email: "nvluan@gmail.com",
              password:              "nvluan",
              password_confirmation: "nvluan",
-             admin:   true)
+             admin: true)
 
 10.times do |n|
   name  = Faker::Name.name
@@ -13,4 +13,8 @@ User.create!(name:  "nvluan",
                password:              password,
                password_confirmation: password)
 end
-
+users = User.order(:created_at).take(6)
+10.times do
+  content = Faker::Lorem.sentence(5)
+  users.each { |user| user.microposts.create!(content: content) }
+end
